@@ -21,7 +21,9 @@ DLC_LOGO_PATH = os.path.join(ASSET_DIR, "logo_dlc.png")
 FUNDER_LOGOS_PATH = os.path.join(ASSET_DIR, "foerderlogos_eu_sh.png")
 LOCATION_ICON_PATH = os.path.join(ASSET_DIR, "icon_location.png")
 CALENDAR_ICON_PATH = os.path.join(ASSET_DIR, "icon_calendar.png")
-CTA_ICON_PATH = os.path.join(ASSET_DIR, "icon_cta.png")
+FONT_DIR = os.path.join(ASSET_DIR, "fonts")
+WORK_SANS_REGULAR = os.path.join(FONT_DIR, "WorkSans-Regular.ttf")
+WORK_SANS_BOLD = os.path.join(FONT_DIR, "WorkSans-Bold.ttf")
 COLOR_THEMES = [
     ((33, 81, 176), (193, 108, 223)),   # blue → purple
     ((239, 74, 74), (240, 146, 86)),    # red → orange
@@ -206,11 +208,11 @@ def generate_social_image(event: dict, qr_path: str, output_path: str) -> None:
     draw = ImageDraw.Draw(image)
 
     # Fonts. Arial is usually available on Windows; fallback is handled.
-    title_font = load_font("arialbd.ttf", 52)
-    meta_font = load_font("arial.ttf", 30)
-    meta_bold_font = load_font("arialbd.ttf", 30)
-    desc_font = load_font("arial.ttf", 34)
-    small_font = load_font("arial.ttf", 22)
+    title_font = load_font(WORK_SANS_BOLD, 56)
+    #meta_font = load_font(WORK_SANS_REGULAR, 34)
+    meta_bold_font = load_font(WORK_SANS_BOLD, 36)
+    desc_font = load_font(WORK_SANS_REGULAR, 36)
+    small_font = load_font(WORK_SANS_REGULAR, 24)
 
     # Clean and shorten text for image rendering.
     title = clean_text_for_image(event["title"])
@@ -226,13 +228,14 @@ def generate_social_image(event: dict, qr_path: str, output_path: str) -> None:
     # Top metadata row with icons
 
     # Left block: location / organizer
-    paste_icon(image, LOCATION_ICON_PATH, 60, 110, 115)
-    draw.text((190, 140), location, font=meta_bold_font, fill=(255, 255, 255))
+    paste_icon(image, LOCATION_ICON_PATH, 55, 105, 120)
+    draw.text((190, 130), location, font=meta_bold_font, fill=(255, 255, 255))
 
     # Right block: date and time
-    paste_icon(image, CALENDAR_ICON_PATH, 550, 110, 115)
-    draw.text((690, 140), date, font=meta_bold_font, fill=(255, 255, 255))
-    draw.text((690, 180), time, font=meta_bold_font, fill=(255, 255, 255))
+    paste_icon(image, CALENDAR_ICON_PATH, 545, 105, 120)
+    draw.text((685, 128), date, font=meta_bold_font, fill=(255, 255, 255))
+    draw.text((685, 172), time, font=small_font, fill=(255, 255, 255))
+
 
     # Main title.
     title_lines = textwrap.wrap(title, width=26)
@@ -262,14 +265,11 @@ def generate_social_image(event: dict, qr_path: str, output_path: str) -> None:
 
     # QR code card.
     qr_size = 150
-    qr_x = width - qr_size - 80
+    qr_x = width - qr_size - 40
     qr_y = height - 130 - qr_size - 65
 
-    # CTA icon above the QR code
-    cta_size = 150
-    cta_x = qr_x + 5
-    cta_y = qr_y - cta_size - 10
-    paste_icon(image, CTA_ICON_PATH, cta_x, cta_y, cta_size)
+    # CTA icon above the QR code removed based on supervisor feedback.
+    # The QR code itself remains the main call-to-action element.
 
     draw.rounded_rectangle(
         (qr_x - 18, qr_y - 18, qr_x + qr_size + 18, qr_y + qr_size + 46),

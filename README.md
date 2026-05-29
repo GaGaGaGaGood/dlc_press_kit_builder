@@ -22,7 +22,9 @@ The prototype is a standalone demonstrator. It does not connect directly to the 
 - Output folder access from the GUI
 - Text preprocessing for long descriptions and unsupported emoji/symbols
 - Gradient background variation for generated social media posts
-- Use of DLC-style icons and branding elements in the social media post template
+- Use of DLC-style icons, Work Sans typography, and branding elements in the social media post template
+- Printer-friendly flyer/poster layout with DLC dark blue header, DLC logo, and funding logos
+- QR code card as the main call-to-action element in generated assets
 
 ## Required Libraries
 
@@ -90,9 +92,19 @@ The prototype currently uses manual metadata input. Direct integration with the 
 
 The DLC logo used in this prototype was obtained from the official DLC website and is included for demonstration purposes in the context of this bachelor thesis project.
 
-The generated social media post uses a DLC-inspired visual style, including a gradient background, icon-based metadata presentation, a QR code card, and a bottom branding bar. However, the template is not an official DLC corporate identity template.
+The generated social media post uses a DLC-inspired visual style, including a gradient background, Work Sans typography, icon-based metadata presentation, prominent location and date/time information, a QR code card, and a bottom branding bar.
+
+The flyer/poster template uses a more printer-friendly layout with a simple white content area, a DLC dark blue header (`#29396D`), the DLC logo at the top, and funding logos at the bottom.
 
 For production use, official DLC brand assets, licensing conditions, and design guidelines should be confirmed by the DLC team.
+
+## Evaluation and Boundary Testing
+
+The prototype was tested with selected real DLC learning-offer examples and additional boundary cases. The boundary tests include short titles, long titles, long compound words, long descriptions, German special characters, and missing optional metadata fields.
+
+These tests are used to identify the current layout behavior and the limitations of the prototype. The goal is not to cover all possible DLC learning-offer cases, but to document which cases were considered and which cases would require future layout or metadata-handling improvements.
+
+The detailed evaluation table is included in `docs/prototype_evaluation_test_cases.xlsx`.
 
 ## Known Limitations
 
@@ -103,6 +115,11 @@ For production use, official DLC brand assets, licensing conditions, and design 
 - Flyer export is PNG only, not PDF or SVG.
 - Generated assets are not yet editable in template tools such as Inkscape, Canva, or Figma.
 - The social media template is DLC-inspired but not an official DLC CI template.
+- Recurring events or learning offers with multiple dates are not explicitly supported.
+- Very long titles, long compound words, or unusually long metadata entries may require additional layout strategies such as automatic font scaling, hyphenation, or alternative templates.
+- Missing metadata fields such as date or time are not yet replaced by user-friendly placeholders.
+- Multilingual layouts beyond German/English have not been systematically tested.
+- Backgrounds for social media posts are generated procedurally; predefined background graphics are not yet supported.
 
 ## Future Improvements
 
@@ -110,14 +127,19 @@ Potential future extensions include:
 
 - Direct metadata import from the DLC backend or CMS
 - Official DLC CI / branding integration
-- Editable SVG or PDF export
 - Additional promotional templates for different platforms
-- Dedicated metadata fields such as `teaser_text` or `promotional_description`
+- Support for recurring events and learning offers with multiple dates
+- Automatic layout adaptation for very long titles, long compound words, and missing metadata fields
+- User-friendly placeholders such as “Date to be announced” for incomplete metadata
+- Predefined background graphics for social media formats
+- Editable SVG or PDF export for further adaptation in tools such as Inkscape, Canva, or Figma
+- Additional metadata fields such as `teaser_text`, `promotional_description`, `short_title`, or `platform_specific_text`
+- Extended multilingual testing and layout adaptation
 - OCR or structured handling for image-based descriptions
 - Improved template customization for trainers or communication staff
 
 ## License
 
-The source code of this prototype is intended to be released under the MIT License.
+The source code of this prototype is released under the MIT License.
 
 Logo and branding assets are used only for prototype demonstration in the context of the DLC bachelor thesis project. For production use or redistribution, official DLC brand asset permissions should be confirmed.
